@@ -32,23 +32,23 @@ class Users(db.Model):
 
 
     # need to make sure first & last name are unique when joined
-    unique(db.first_name, db.last_name)
+    # unique(db.first_name, db.last_name)
 
 
 
-    def greet(self):
-        """Greet using name."""
+    # def greet(self):
+    #     """Greet using name."""
 
-        return f"I'm {self.name} the {self.species or 'thing'}"
+    #     return f"I'm {self.name} the {self.species or 'thing'}"
 
-    def feed(self, units=10):
-        """Nom nom nom."""
+    # def feed(self, units=10):
+    #     """Nom nom nom."""
 
-        self.hunger -= units
-        self.hunger = max(self.hunger, 0)
+    #     self.hunger -= units
+    #     self.hunger = max(self.hunger, 0)
 
-    @classmethod
-    def get_by_species(cls, species):
-        """Get all pets matching that species."""
+    # @classmethod
+    # def get_by_species(cls, species):
+    #     """Get all pets matching that species."""
 
-        return cls.query.filter_by(species=species).all()
+    #     return cls.query.filter_by(species=species).all()

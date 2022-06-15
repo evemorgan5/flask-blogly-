@@ -19,8 +19,8 @@ debug = DebugToolbarExtension(app)
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 
-# line of code below given to us in file
-# db.create_all()
+#db.create_all()
+
 
 
 
@@ -30,10 +30,15 @@ def list_users():
     """List pets and show add form."""
 
     users = Users.query.all()
-    return render_template("userinterface.html", users=users)
+    return render_template("home.html", users=users)
+
+@app.get("/create_user")
+def show_user_form():
+    """shows user form"""
+    return render_template("create_user.html")
 
 
-@app.post("/")
+@app.post("/create_user")
 def add_user():
     """Add user and redirect to list."""
 

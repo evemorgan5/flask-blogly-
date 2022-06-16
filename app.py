@@ -22,23 +22,27 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 #db.create_all()
 
 @app.get("/")
-def list_users():
-    """List pets and show add form."""
+def return_users_page():
+    """Redirect to users page."""
+    return redirect("/users")
 
+
+@app.get("/users")
+def list_users():
+    """List users."""
     users = User.query.all()
     return render_template("home.html", users=users)
 
 
-@app.get("/create_user")
+@app.get("/users/new")
 def show_user_form():
-    """shows user form"""
+    """Show new user form."""
     return render_template("create_user.html")
 
 
-@app.post("/create_user")
+@app.post("/users/new")
 def add_user():
-    """Add user and redirect to list."""
-
+    """Add new user and redirect to new user page (/users/user_id)."""
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     img_url = request.form['img_url']
@@ -50,33 +54,44 @@ def add_user():
     db.session.add(user)
     db.session.commit()
 
-    return redirect(f"/{user.id}")
+    return redirect(f"/users/{user.id}")
 
-@app.get("/<int:user_id>/edit_user")
-def show_edit_form():
+
+@app.get("/users/<int:user_id>")
+def show_user(user_id):
+    """Show info on a single user."""
+    user = User.query.get_or_404(user_id)
+    return render_template("detail.html", user=user)
+
+@app.get("/users/<int:user_id>/edit")
+def show_edit_form_with_old_values(user_id):
     """shows user form"""
-    return render_template("edit.html")
+    user = User.query.get(user_id)
+    return render_template("edit.html", user=user)
 
 
-@app.post("/<int:user_id>/edit_user")
+@app.post("/users/<int:user_id>/edit")
 def edit_user(user_id):
-    """Add user and redirect to list."""
+    """Add user and redirect to users page."""
     edited_first_name = request.form['edited_first_name']
-   # edited_last_name = request.form['edited_last_name']
-    #edited_img_url = request.form['edited_img_url']
+    edited_last_name = request.form['edited_last_name']
+    edited_img_url = request.form['edited_img_url']
 
     user = User.query.get(user_id)
     user.first_name = edited_first_name
-
-    print(user)
+    user.last_name = edited_last_name
+    user.img_url = edited_img_url
     db.session.commit()
 
-    return redirect("/")
+    return redirect("/users")
 
 
-@app.get("/<int:user_id>")
-def show_user(user_id):
-    """Show info on a single user."""
+@app.post("/users/<int:user_id>/delete")
+def delete_user(user_id):
+    """Delete user and redirect to users page."""
 
-    user = User.query.get_or_404(user_id)
-    return render_template("detail.html", user=user)
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect("/users")

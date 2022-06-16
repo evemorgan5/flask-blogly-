@@ -41,12 +41,13 @@ class User(db.Model):
 
     #     return f"I'm {self.name} the {self.species or 'thing'}"
 
-    def make_edits(self, edited_first_name, edited_last_name, edited_img_url):
-        """Nom nom nom."""
+    # def make_edits(self, edited_first_name, edited_last_name, edited_img_url):
+    #     """Nom nom nom."""
+    #     self.first_name = edited_first_name
+    #     self.last_name = edited_last_name
+    #     self.img_url = edited_img_url
+    #     user = User.query.get(user_id)
 
-        self.first_name = edited_first_name
-        self.last_name = edited_last_name
-        self.img_url = edited_img_url
 
 
 

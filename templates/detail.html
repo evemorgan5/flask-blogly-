@@ -8,7 +8,10 @@
 <h1>{{ user.first_name, user.last_name }} </h1>
 
 <img href=user.img_url rel="">
-<button>Edit</button>
+<form action="/edit_user" method="GET">
+  <button>Edit</button>
+</form>
+
 <button>Delete</button>
 <a href="/">Go back</a>
 {% endblock %}

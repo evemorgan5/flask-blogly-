@@ -10,7 +10,7 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
 
-class Users(db.Model):
+class User(db.Model):
     """User."""
 
     __tablename__ = "users"
@@ -25,7 +25,7 @@ class Users(db.Model):
                      nullable=False,
                      unique=False)
 
-    img_url = db.Column(db.String(300),
+    img_url = db.Column(db.String,
                      nullable=False,
                      #  default = img,
                      unique=False)
@@ -41,11 +41,14 @@ class Users(db.Model):
 
     #     return f"I'm {self.name} the {self.species or 'thing'}"
 
-    # def feed(self, units=10):
-    #     """Nom nom nom."""
+    def make_edits(self, edited_first_name, edited_last_name, edited_img_url):
+        """Nom nom nom."""
 
-    #     self.hunger -= units
-    #     self.hunger = max(self.hunger, 0)
+        self.first_name = edited_first_name
+        self.last_name = edited_last_name
+        self.img_url = edited_img_url
+
+
 
     # @classmethod
     # def get_by_species(cls, species):

@@ -1,7 +1,10 @@
 from unittest import TestCase
 
 from app import app, db
-from models import DEFAULT_IMAGE_URL, User
+
+from models import User
+
+# testing users page functionality
 
 # Let's configure our app to use a different database for tests
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///blogly_test"
@@ -58,3 +61,28 @@ class UserViewTestCase(TestCase):
             html = resp.get_data(as_text=True)
             self.assertIn("test_first", html)
             self.assertIn("test_last", html)
+
+# Our tests below
+# don't change above tests given to us
+
+
+    def test_homepage(self):
+        with self.client as c:
+            resp = c.get("/")
+            self.assertEqual(resp.status_code, 302)
+
+    def test_redirect_to_users(self):
+        with self.client as c:
+            resp = c.get("/users", follow_redirects = True)
+            html = resp.get_data(as_text=True)
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("<h1>Users</h1>", html)
+
+    def test_(self):
+        with self.client as c:
+            resp = c.get('/users/new')
+            html = resp.get_data(as_text=True)
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("<h2>create User</h2>", html)
+
+

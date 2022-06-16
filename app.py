@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, request, redirect, render_template
-from models import db, connect_db, User
+from models import db, connect_db, User, DEFAULT_IMAGE_URL
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
@@ -80,7 +80,7 @@ def edit_user(user_id):
     user = User.query.get(user_id)
     user.first_name = edited_first_name
     user.last_name = edited_last_name
-    user.img_url = edited_img_url
+    user.img_url = edited_img_url if edited_img_url else DEFAULT_IMAGE_URL
     db.session.commit()
 
     return redirect("/users")

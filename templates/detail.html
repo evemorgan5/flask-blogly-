@@ -6,8 +6,7 @@
 
 {% block content %}
 <h1>{{ user.first_name}} {{user.last_name }} </h1>
-<img href=user.img_url rel="">
-
+<img src={{user.img_url}} alt="users-photo" width="200px" height="200px">
 <form action="/users/{{user.id}}/edit" method="GET">
   <button>Edit</button>
 </form>

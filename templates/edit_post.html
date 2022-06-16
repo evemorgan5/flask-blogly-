@@ -1,0 +1,8 @@
+{% block content %}
+<h2>Edit Post</h2>
+<form  method="POST">
+  <p>Title:     <input name="edited_title" value="{{user.title}}"></p>
+  <p>Content:     <input name="edited_content" value="{{user.title}}"></p>
+  <button>Edit</button>
+</form>
+{% endblock %}

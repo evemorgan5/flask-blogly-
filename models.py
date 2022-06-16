@@ -1,7 +1,5 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
-from traitlets import default
-
 
 db = SQLAlchemy()
 
@@ -29,10 +27,8 @@ class User(db.Model):
                      unique=False)
 
     img_url = db.Column(db.String,
-                     nullable=False,
-                     default = DEFAULT_IMAGE_URL
-
-                     )
+                    nullable=False,
+                    default=DEFAULT_IMAGE_URL)
 
 
     # need to make sure first & last name are unique when joined
@@ -60,3 +56,25 @@ class User(db.Model):
     #     """Get all pets matching that species."""
 
     #     return cls.query.filter_by(species=species).all()
+
+
+
+# class Post(db.Model):
+#     """Post."""
+
+#     __tablename__ = "post"
+
+#     id = db.Column(db.Integer,
+#                    primary_key=True,
+#                    autoincrement=True)
+#     title = db.Column(db.String(50),
+#                      nullable=False,
+#                      unique=False)
+#     content = db.Column(db.String(50),
+#                      nullable=False,
+#                      unique=False)
+
+#     created_at = db.Column(db.datetime.datetime.now())
+
+#     user_id = db.Column(db.ForeignKey('users.id'))
+

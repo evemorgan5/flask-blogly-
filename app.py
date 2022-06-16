@@ -52,24 +52,26 @@ def add_user():
 
     return redirect(f"/{user.id}")
 
-@app.get("/edit_user")
+@app.get("/<int:user_id>/edit_user")
 def show_edit_form():
     """shows user form"""
     return render_template("edit.html")
 
 
-@app.post("/edit_user")
-def edit_user():
+@app.post("/<int:user_id>/edit_user")
+def edit_user(user_id):
     """Add user and redirect to list."""
     edited_first_name = request.form['edited_first_name']
-    edited_last_name = request.form['edited_last_name']
-    edited_img_url = request.form['edited_img_url']
+   # edited_last_name = request.form['edited_last_name']
+    #edited_img_url = request.form['edited_img_url']
 
-    user.make_edits()
+    user = User.query.get(user_id)
+    user.first_name = edited_first_name
 
+    print(user)
     db.session.commit()
 
-    return redirect(f"/{user.id}")
+    return redirect("/")
 
 
 @app.get("/<int:user_id>")

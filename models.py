@@ -1,8 +1,11 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
+from traitlets import default
+
 
 db = SQLAlchemy()
 
+DEFAULT_IMAGE_URL = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
 
 def connect_db(app):
     """Connect to database."""
@@ -27,8 +30,9 @@ class User(db.Model):
 
     img_url = db.Column(db.String,
                      nullable=False,
-                     #  default = img,
-                     unique=False)
+                     default = DEFAULT_IMAGE_URL
+
+                     )
 
 
     # need to make sure first & last name are unique when joined

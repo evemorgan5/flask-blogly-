@@ -33,10 +33,10 @@ class UserViewTestCase(TestCase):
 
         test_user = User(first_name="test_first",
                                     last_name="test_last",
-                                    image_url=None)
+                                    img_url=None)
 
         second_user = User(first_name="test_first_two", last_name="test_last_two",
-                           image_url=None)
+                           img_url=None)
 
         db.session.add_all([test_user, second_user])
         db.session.commit()

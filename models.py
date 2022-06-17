@@ -1,6 +1,6 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import datetime
 db = SQLAlchemy()
 
 DEFAULT_IMAGE_URL = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
@@ -31,6 +31,8 @@ class User(db.Model):
                     default=DEFAULT_IMAGE_URL)
 
 
+
+
     # need to make sure first & last name are unique when joined
     # unique(db.first_name, db.last_name)
 
@@ -59,22 +61,22 @@ class User(db.Model):
 
 
 
-# class Post(db.Model):
-#     """Post."""
+class Post(db.Model):
+    """Post."""
 
-#     __tablename__ = "post"
+    __tablename__ = "posts"
 
-#     id = db.Column(db.Integer,
-#                    primary_key=True,
-#                    autoincrement=True)
-#     title = db.Column(db.String(50),
-#                      nullable=False,
-#                      unique=False)
-#     content = db.Column(db.String(50),
-#                      nullable=False,
-#                      unique=False)
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    title = db.Column(db.String(50),
+                     nullable=False,
+                     )
+    content = db.Column(db.String(50),
+                     nullable=False,
+                     )
 
-#     created_at = db.Column(db.datetime.datetime.now())
+    #created_at = db.Column(default = datetime.now)
 
-#     user_id = db.Column(db.ForeignKey('users.id'))
-
+    user_id = db.Column(db.ForeignKey('users.id'))
+    user = db.relationship('User', backref='posts')

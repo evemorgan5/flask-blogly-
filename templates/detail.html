@@ -15,5 +15,16 @@
   <button>Delete</button>
 </form>
 
+<h2> Posts</h2>
+<ul>
+  {% for post in posts %}
+  <li><a href="/users/{{user.id}}/posts"> {{post.title}}</a></li>
+  {% endfor %}
+</ul>
+<form action="/users/{{user.id}}/posts/new" method="GET">
+  <button>Add post</button>
+</form>
+
+
 <a href="/">Go back</a>
 {% endblock %}
